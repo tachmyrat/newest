@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static %}{% block title %} bosh sahypa
+{%endblock title %} {% block content %} {% if user.is_authenticated%}
+Sahypamyzda hosh gorduk {{user.first_name}}!!
+<!-- first_name derek last_name yazsanyz onda siz last name home sahypa cykar-->
+<p><a href="{%url 'logout'%}">cykmak</a></p>
+{%else%}
+<a href="{%url 'login'%}"></a>
+<a href="{%url 'signup'%}"></a>
+{%endif%}
+<br />
+<div class="jumbotron">
+  <h1 class="display-4">Essalamu Aleykum</h1>
+  <p class="lead">Täçmyrat Haýtyýewiň bloguna Hoş geldiňiz!!</p>
+  <hr class="my-4" />
+  <p>
+    Bu web-saytda siz dürli habarlar bilen tanşyp olara tesswir galdyryp
+    bilersiňiz!!.
+  </p>
+  <p class="lead">
+    <a
+      class="btn btn-primary btn-lg"
+      href="{%url 'article_list'%}"
+      role="button"
+      >Postlary gormek</a
+    >
+  </p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{%url 'article_new'%}" role="button"
+      >Taze post girizmek</a
+    >
+  </p>
+</div>
+{%endblock content%}
