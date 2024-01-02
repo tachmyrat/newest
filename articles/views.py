@@ -55,6 +55,8 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Article
     template_name = 'article_new.html'
+    login_url = "/accounts/login"
+    redirect_field_name = "article_new"
     fields = ('title','summary','body','photo','video',)
 # shu ashakdaky kodun manysy haysydyr bir post goyandan authory ozi saylap bilmezden dine goyan postlaryny oz adyndan goymaklyk ucindir
     def form_valid(self, form):
