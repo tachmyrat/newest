@@ -12,6 +12,7 @@ class Article(models.Model):
     summary = models.CharField(max_length=200, blank=True )
     body= RichTextField()
     photo= models.ImageField(upload_to='images/', blank=True)
+    video = models.FileField(upload_to='videos/', blank=True)
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         get_user_model(),

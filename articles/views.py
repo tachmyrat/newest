@@ -55,7 +55,7 @@ class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Article
     template_name = 'article_new.html'
-    fields = ('title','summary','body','photo',)
+    fields = ('title','summary','body','photo','video',)
 # shu ashakdaky kodun manysy haysydyr bir post goyandan authory ozi saylap bilmezden dine goyan postlaryny oz adyndan goymaklyk ucindir
     def form_valid(self, form):
         form.instance.author = self.request.user
