@@ -1,5 +1,22 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .models import CustomUser
+from articles.models import Comment
+from django import forms
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['comment']  # Customize fields as needed
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['comment'].widget.attrs.update({'class': 'form-control'})  # Add CSS class
+
+    def clean_body(self):
+        body = self.cleaned_data['comment']
+        # Add validation logic here, e.g., for spam detection, length restrictions, etc.
+        return body
+
 #forms py bu biz registrasiyta edilende jangonun tayyn bregistrasiyasyndan peydalanman oz islegimiz boyunca yasamaklyk ucin bolup duryar
 # ilki bilen modelsde class doredip ony hem djangonun abstractuser diyen librarysyndan peydalanyp yasayas
 class CustomUserCreationForm(UserCreationForm):

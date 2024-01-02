@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>{{ object.title }}</h1>
+<p>{{ object.content }}</p>
+<h2>Comments</h2>
+
+<ul>
+  {% for comment in object.comments.all %}
+  <li>
+    <strong>{{ comment.user.username }}</strong> said:
+    <p>{{ comment.body }}</p>
+    <p class="comment-metadata">
+      Posted on {{ comment.created_date }} {% if request.user == comment.user %}
+      - <a href="{% url 'edit_comment' comment.id %}">Edit</a> -
+      <a href="{% url 'delete_comment' comment.id %}">Delete</a>
+      {% endif %}
+    </p>
+  </li>
+  {% empty %}
+  <li>No comments yet. Be the first to comment!</li>
+  {% endfor %}
+</ul>
+
+<h2>Add a comment</h2>
+
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Submit Comment</button>
+</form>
+
+{% endblock %}

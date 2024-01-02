@@ -3,11 +3,17 @@
 #class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 #UserPassesTestMixin- bu haysydyr posty uytgedip bolman dine oz goshan posduny uytgeder yaly edyar
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.decorators import login_required
+
+from .models import Comment
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
+from .models import Article,Comment
+from django.shortcuts import render,redirect,get_object_or_404
+from .forms import CommentForm
 
-from .models import Article
+
 
 class ArticleListView(ListView):
     model = Article
@@ -16,6 +22,17 @@ class ArticleListView(ListView):
 class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
+    fields = "__all__"
+@login_required(login_url='/accounts/login/')
+def createComment(request, article_id):
+    body = request.POST.get("comment")
+    comment = Comment.objects.create(
+        article = Article.objects.get(id=article_id),
+        author = request.user,
+        comment = body,
+      )
+    comment.save()
+    return redirect("article_detail", article_id)
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
@@ -47,3 +64,6 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     # user superuser ekanini tekshirish dine super user Articlecreateviewe girip biler yaly etdik
     def test_func(self):
         return self.request.user.is_superuser
+
+
+

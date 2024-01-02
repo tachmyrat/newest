@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Delete Comment</h1>
+
+<p>Are you sure you want to delete the following comment?</p>
+
+<blockquote>{{ comment.body }}</blockquote>
+
+<p>
+  <a href="{% url 'delete_comment' comment.id %}" class="btn btn-danger"
+    >Confirm Delete</a
+  >
+  <a
+    href="{% url 'article_list' comment.content_object.id %}"
+    class="btn btn-secondary"
+    >Cancel</a
+  >
+</p>
+
+{% endblock %}
