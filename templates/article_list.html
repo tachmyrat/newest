@@ -17,6 +17,11 @@
       src="{{ article.photo.url }}"
       alt="{{ article.title }}"
     />
+    {% endif %} {% if article.video %}
+    <video class="card-img-top" controls preload="metadata">
+      <source src="{{ article.video.url }}" type="{{ article.video.type }}" />
+      Your browser does not support the video tag.
+    </video>
     {% endif %}
     <div class="card-body">
       {{ article.summary }}...<a href="{% url 'article_detail' article.pk  %}"
