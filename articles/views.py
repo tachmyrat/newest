@@ -36,7 +36,7 @@ def createComment(request, article_id):
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article
-    fields = ('title','summary', 'body','photo',)
+    fields = ('title','summary', 'body','photo','video',)
     template_name = 'article_edit.html'
 
     def test_func(self):
