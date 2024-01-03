@@ -64,8 +64,8 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return super().form_valid(form)
 
     # user superuser ekanini tekshirish dine super user Articlecreateviewe girip biler yaly etdik
-    def test_func(self):
-        return self.request.user.is_superuser
+    #def test_func(self):
+     #   return self.request.user.is_superuser
 
 
 
