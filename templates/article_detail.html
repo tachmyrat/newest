@@ -8,7 +8,13 @@
         src="{{ object.photo.url }}"
         alt="{{ object.title }}"
       />
+      {% endif %} {% if article.video %}
+      <video class="card-img-top" controls preload="metadata">
+        <source src="{{ article.video.url }}" type="{{ article.video.type }}" />
+        Your browser does not support the video tag.
+      </video>
       {% endif %}
+
       <h1 class="card-title">{{ object.title }}</h1>
       <h6 class="card-subtitle mb-2 text-muted">
         {{ object.author }} tarapyndan | {{ object.date }}
