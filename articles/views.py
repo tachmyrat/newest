@@ -62,12 +62,11 @@ class ArticleCreateView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    def test_func(self):
-        obj = self.get_object()
-        return obj.author == self.request.user
+   
     # user superuser ekanini tekshirish dine super user Articlecreateviewe girip biler yaly etdik
-    #def test_func(self):
-     #   return self.request.user.is_superuser
+    def test_func(self):
+       return self.request.user
+       #.is_superuser
 
 
 
