@@ -9,7 +9,7 @@ from .models import Comment
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import UpdateView, DeleteView, CreateView
 from django.urls import reverse_lazy
-from .models import Article,Comment
+from .models import Article,Comment,Pcomment
 from django.shortcuts import render,redirect,get_object_or_404
 from .forms import CommentForm
 
@@ -33,6 +33,16 @@ def createComment(request, article_id):
       )
     comment.save()
     return redirect("article_detail", article_id)
+@login_required(login_url='/accounts/login/')
+def createpcomment(request, comment_id):
+    body = request.POST.get("pcomment")
+    pcomment = Pcomment.objects.create(
+        comment = Comment.objects.get(id=comment_id),
+        author = request.user,
+        pcomment = body,
+      )
+    pcomment.save()
+    return redirect("article_detail", Comment.objects.get(id=comment_id).article.id)
 
 class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Article

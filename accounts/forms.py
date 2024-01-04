@@ -22,9 +22,17 @@ class CommentForm(forms.ModelForm):
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm):
         model = CustomUser
-        fields = ('username', 'first_name','last_name','email','age','address',) #egerde biz bu yere bashgada bir zat goshjak bolsak mysal ucin tel nomeri onda biz ilki modells.pydaki class myza girizip sonra munba hem girizmeli
+        fields = ('username', 'profile_picture','first_name','last_name','email','age','address',) #egerde biz bu yere bashgada bir zat goshjak bolsak mysal ucin tel nomeri onda biz ilki modells.pydaki class myza girizip sonra munba hem girizmeli
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
-        fields = ('username', 'first_name','last_name','email','age','address',) #egerde biz bu verden username ya-da bashga bir zady ocursek shony hem uytgedip bolmaz yaly bolyar
+        fields = ('username', 'first_name','last_name','email','age','address','profile_picture') #egerde biz bu verden username ya-da bashga bir zady ocursek shony hem uytgedip bolmaz yaly bolyar
         # admin.py registrasiya edyas hem-de birikdiryas
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ('username', 'first_name', 'last_name', 'email', 'age', 'address', 'profile_picture')  # Adjust fields as needed
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['profile_picture'].required = False  # Make profile picture optional

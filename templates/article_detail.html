@@ -31,8 +31,36 @@
         <blockquote class="blockquote mb-0">
           <p>{{ comment }}</p>
 
-          <footer class="blockquote-footer">{{ comment.author }}</footer>
+          <footer class="blockquote-footer">
+            {{ comment.author }}<a
+              href="#reply-{{ comment.id }}"
+              class="reply-link"
+              >Reply</a
+            >
+          </footer>
         </blockquote>
+
+        <div id="replies-{{ comment.id }}" class="replies">
+          {% for reply in comment.pcomments.all %}
+          <div class="reply">
+            <p>{{ reply }}</p>
+            <footer class="reply-footer">{{ reply.author }}</footer>
+          </div>
+          {% endfor %}
+
+          <form
+            method="post"
+            enctype="multipart/form-data"
+            action="{% url 'pcreate_comment' comment.id %}"
+          >
+            {% csrf_token %}
+            <textarea
+              name="pcomment"
+              placeholder="Write your reply here"
+            ></textarea>
+            <button type="submit">Reply</button>
+          </form>
+        </div>
       </div>
       {% endfor %}
       <h2>Add a Comment</h2>

@@ -5,4 +5,5 @@ from django.db import models
 class CustomUser(AbstractUser):
     age = models.PositiveIntegerField(null=True, blank=True) # egerde True-ni False etsek yashyny hokmany girizmeli bolyar
     address = models.CharField(max_length=140)
+    profile_picture= models.ImageField(upload_to='images/', blank=True)
     #modele girizen zatlarmyzy forms.py bn baglanyshdyryas

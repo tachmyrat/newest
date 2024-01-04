@@ -1,0 +1,21 @@
+{% extends 'base.html' %} {% block content %}
+<title>Profile Page - {{ user.username }}</title>
+    </head>
+<body>
+    <h1>{{ user.username }}'s Profile</h1>
+    <div class="profile-info">
+        {% if user.photo %}
+    <img
+      class="card-img-top"
+      src="{{ user.profile_picture.url }}"
+    />
+    {% endif %}
+        <img src="" alt="{{ user.username }}'s profile picture" class="img-thumbnail">
+        <p>Username: {{ user.username }}</p>
+        <p>Email: {{ user.email }}</p>
+        </div>
+        <a href="{% url 'change' user.pk %}">Uytgetmek</a> |
+   
+</body>
+</html>
+{% endblock content %}
